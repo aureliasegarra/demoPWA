@@ -1,4 +1,15 @@
 body {
-    background-color: #979ff8;
+    background-color: #3c4bf5;
+}
+ .col {
+     color: rgb(249, 252, 252);
+ }
+
+ h1, h2 {
+     color:rgb(249, 252, 252);
+ }
+
+#technos {
+    color: rgb(9, 3, 44);
 }
 
