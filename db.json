@@ -1,8 +1,34 @@
 {
-    "technos": [
-        {"id": 1, "name": "Vue", "description": "The progressive Framework", "url": "https://vuejs.org/"},
-        {"id": 2, "name": "GraphQL", "description": "A query language for your API", "url": "https://graphql.org/"},
-        {"id": 3, "name": "MongoDB", "description": "The application data platform", "url": "https://www.mongodb.com/fr-fr"},
-        {"id": 4, "name": "PWA", "description": "rendre vos applications ++", "url": "https://developer.mozilla.org/en-US/Apps/Progressive"}
-    ]
+  "technos": [
+    {
+      "id": 1,
+      "name": "Vue",
+      "description": "The progressive Framework",
+      "url": "https://vuejs.org/"
+    },
+    {
+      "id": 2,
+      "name": "GraphQL",
+      "description": "A query language for your API",
+      "url": "https://graphql.org/"
+    },
+    {
+      "id": 3,
+      "name": "MongoDB",
+      "description": "The application data platform",
+      "url": "https://www.mongodb.com/fr-fr"
+    },
+    {
+      "id": 4,
+      "name": "PWA",
+      "description": "rendre vos applications ++",
+      "url": "https://developer.mozilla.org/en-US/Apps/Progressive"
+    },
+    {
+      "name": "React.js",
+      "description": "Javascript library",
+      "url": "https://fr.reactjs.org/",
+      "id": 5
+    }
+  ]
 }
