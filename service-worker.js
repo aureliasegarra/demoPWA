@@ -25,7 +25,18 @@ self.addEventListener('fetch', event => {
         event.respondWith(new Response('<h1>No network connection</h1><div>Application en mode dégradé. Veuillez vous connecter !</div>', headers));
     }
     console.log('fetch event', event.request.url);
+
+    event.respondWith(
+        caches.match(event.request).then(res => {
+            if(res) {
+                return res;
+            }
+        })
+    )
+
 });
+
+
 
 
 
