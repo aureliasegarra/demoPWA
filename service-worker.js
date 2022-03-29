@@ -26,14 +26,18 @@ self.addEventListener('fetch', event => {
     }
     console.log('fetch event', event.request.url);
 
+    // Strategy cache only => Cache with network fallback
     event.respondWith(
         caches.match(event.request).then(res => {
             if(res) {
                 return res;
-            }
+            } 
+            return fetch(event.request).then(newResponse => {
+                caches.open(cacheName).then(cache => cache.put(event.request, newResponse));
+                return newResponse.clone();
+            })
         })
-    )
-
+    );
 });
 
 
