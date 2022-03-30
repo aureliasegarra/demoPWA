@@ -2,8 +2,8 @@ const cacheName = 'veille-techno-1.0';
 
 self.addEventListener('install', event => {
     console.log('install event', event);
-    caches.open(cacheName).then(cache => {
-        cache.addAll([
+    const cachePromise = caches.open(cacheName).then(cache => {
+        return cache.addAll([
             'index.html', 
             'main.js',
             'vendors/bootstrap4.min.css',
@@ -12,7 +12,10 @@ self.addEventListener('install', event => {
             'add_techno.html',
             'add_techno.js'
         ]);
-    })
+    });
+
+    // ensure that the service worker remains active
+    event.waitUntil(cachePromise);
 });
 
 self.addEventListener('activate', event => {
