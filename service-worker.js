@@ -1,4 +1,4 @@
-const cacheName = 'veille-techno-1.0';
+const cacheName = 'veille-techno-1.2';
 
 self.addEventListener('install', event => {
     console.log('install event', event);
@@ -20,6 +20,15 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
     console.log('activate', event);
+    // Delete old cache instances
+    let cacheCleanedPromise = caches.keys().then(keys => {
+        keys.forEach(key => {
+            if(key !== cacheName) {
+                caches.delete(key);
+            }
+        })
+    });
+    event.waitUntil(cacheCleanedPromise);
 });
 
 self.addEventListener('fetch', event => {
