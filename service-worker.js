@@ -20,11 +20,14 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+    /*
     if (!navigator.online) {
         const headers = { headers: { 'content-Type': 'text/html;charset=utf-8'}};
         event.respondWith(new Response('<h1>No network connection</h1><div>Application en mode dégradé. Veuillez vous connecter !</div>', headers));
     }
+    */
 
+    /*
     // Strategy cache only => Cache with network fallback
     event.respondWith(
         caches.match(event.request).then(res => {
@@ -37,6 +40,19 @@ self.addEventListener('fetch', event => {
                 caches.open(cacheName).then(cache => cache.put(event.request, newResponse));
                 return newResponse.clone();
             })
+        })
+    );
+    */
+
+    // Strategy network first => cache fallback
+    event.respondWith(
+        fetch(event.request).then(res => {
+            console.log(`${event.request.url} fetched form network`);
+            caches.open(cacheName).then(cache => cache.put(event.request, res));
+            return res.clone();
+        }).catch(error => {
+            console.log(`${event.request.url} fetched form cache`);
+            return caches.match(event.request)
         })
     );
 });
