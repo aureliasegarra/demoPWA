@@ -31,36 +31,19 @@ self.addEventListener('activate', event => {
     event.waitUntil(cacheCleanedPromise);
 });
 
-self.addEventListener('fetch', event => {
-    /*
-    if (!navigator.online) {
-        const headers = { headers: { 'content-Type': 'text/html;charset=utf-8'}};
-        event.respondWith(new Response('<h1>No network connection</h1><div>Application en mode dégradé. Veuillez vous connecter !</div>', headers));
-    }
-    */
 
-    /*
-    // Strategy cache only => Cache with network fallback
-    event.respondWith(
-        caches.match(event.request).then(res => {
-            if(res) {
-                console.log(`fetched url from cache ${event.request.url}`, res);
-                return res;
-            } 
-            return fetch(event.request).then(newResponse => {
-                console.log(`fetched url from network then put in the cache ${event.request.url}`, newResponse);
-                caches.open(cacheName).then(cache => cache.put(event.request, newResponse));
-                return newResponse.clone();
-            })
-        })
-    );
-    */
+self.addEventListener('fetch', event => {
 
     // Strategy network first => cache fallback
+    console.log('event', event);
+    if(event.request.method === 'POST') {
+        return;
+    }
     event.respondWith(
         fetch(event.request).then(res => {
-            console.log(`${event.request.url} fetched form network`);
+            // Add the latest version into the cache
             caches.open(cacheName).then(cache => cache.put(event.request, res));
+            // we clone it as as a response can be read only once
             return res.clone();
         }).catch(error => {
             console.log(`${event.request.url} fetched form cache`);
@@ -70,6 +53,45 @@ self.addEventListener('fetch', event => {
 });
 
 
+// ------------------------------------------------------------
+// -----------  PERSISTENT NOTIFICATIONS ------------------
+// ------------------------------------------------------------
 
+/* self.registration.showNotification('Notif depuis le sw', {
+    body: 'je suis une notification dite "persitante"',
+    actions: [
+        {action: 'accept', title: 'accepted'},
+        {action: 'refuse', title: 'refused'}
+    ]
+});
 
+// Message when close notifications
+self.addEventListener('notificationclose', event => {
+    console.log('notification fermée', event);
+});
+
+self.addEventListener('notificationclick', event => {
+    // Detect action
+    if (event.action === 'accept') {
+        console.log('Vous avez accepté');
+    } else if (event.action === 'refuse') {
+        console.log('Vous avez refusé');
+    } else {
+        console.log('Vous avez cliqué sur la notification (pas sur un bouton)');
+    }
+    event.notification.close();
+});
+ */
+
+// Notification Push
+self.addEventListener('push', event => {
+    console.log('push event', event);
+    console.log('data envoyée par la push notification des dev tools : ', event.data.text());
+    const title = event.data.text();
+    self.waitUntil(self.registration .showNotification(title, 
+        {
+            body: "ça marche !", 
+            image: "images/icons/icon-192x192.png"
+        }));
+});
 

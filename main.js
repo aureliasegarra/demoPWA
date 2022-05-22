@@ -34,8 +34,13 @@ if (window.caches) {
     
 }
 
+// ------------------------------------------------------------
+// -----------  NON PERSISTENT NOTIFICATIONS ------------------
+// ------------------------------------------------------------
+
+
 // Check if user's browser can support notifications
-if (window.Notification && window.Notification !== 'denied') {
+ if (window.Notification && window.Notification !== 'denied') {
     Notification.requestPermission(perm => {
         if(perm === 'granted') {
             const options = {
@@ -47,4 +52,4 @@ if (window.Notification && window.Notification !== 'denied') {
             console.log('autorisation de recevoir des notifications a été refusé ! ');
         }
     })
-}
+}  
