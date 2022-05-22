@@ -1,16 +1,40 @@
 body {
-    background-color: #3c4bf5;
+    background-color: hsl(0, 0%, 98%);
     margin: 20px;
 }
- .col {
-     color: rgb(249, 252, 252);
+ .col a {
+     color: rgb(89, 89, 90);
+     font-size: 20px;
+     font-weight: bold;
+     font-family: Roboto, sans-serif;
  }
 
  h1, h2 {
-     color:rgb(249, 252, 252);
+     color:rgb(5, 212, 212);
+     font-family: Roboto, sans-serif;
  }
 
-#technos {
-    color: rgb(9, 3, 44);
+ h1 {
+     margin-top: 5rem;
+ }
+
+h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 
+#technos {
+    color: rgb(89, 89, 90);
+    font-family: Roboto, sans-serif;
+}
+
+.urlLink {
+    color: rgb(5, 212, 212);
+    font-family: Roboto, sans-serif;
+    font-style: italic;
+    margin-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}

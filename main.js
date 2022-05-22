@@ -1,4 +1,3 @@
-console.log('hello from main');
 const technosDiv = document.querySelector('#technos');
 
 function loadTechnologies() {
@@ -6,7 +5,7 @@ function loadTechnologies() {
         .then(response => {
             response.json()
                 .then(technos => {
-                    const allTechnos = technos.map(techno => `<div><b>${techno.name}</b> ${techno.description}  <a href="${techno.url}">site de ${techno.name}</a> </div>`)
+                    const allTechnos = technos.map(techno => `<div><b>${techno.name}</b> ${techno.description} <br> <a class="urlLink" href="${techno.url}">site de ${techno.name}</a> </div>`)
                             .join('');
             
                     technosDiv.innerHTML = allTechnos; 
