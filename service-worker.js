@@ -32,9 +32,8 @@ self.addEventListener('activate', event => {
 });
 
 
+// Strategy network first => cache fallback
 self.addEventListener('fetch', event => {
-
-    // Strategy network first => cache fallback
     console.log('event', event);
     if(event.request.method === 'POST') {
         return;
@@ -45,10 +44,7 @@ self.addEventListener('fetch', event => {
             caches.open(cacheName).then(cache => cache.put(event.request, res));
             // we clone it as as a response can be read only once
             return res.clone();
-        }).catch(error => {
-            console.log(`${event.request.url} fetched form cache`);
-            return caches.match(event.request)
-        })
+        }).catch(error => caches.match(event.request))
     );
 });
 
