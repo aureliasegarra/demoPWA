@@ -33,3 +33,14 @@ if (window.caches) {
     })
     
 }
+
+// Check if user's browser can support notifications
+if (window.Notification && window.Notification !== 'denied') {
+    Notification.requestPermission(perm => {
+        if(perm === 'granted') {
+            const notif = new Notification('Hello nototification');
+        } else {
+            console.log('autorisation de recevoir des notifications a été refusé ! ');
+        }
+    })
+}
