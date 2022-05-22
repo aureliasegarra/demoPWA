@@ -38,7 +38,11 @@ if (window.caches) {
 if (window.Notification && window.Notification !== 'denied') {
     Notification.requestPermission(perm => {
         if(perm === 'granted') {
-            const notif = new Notification('Hello nototification');
+            const options = {
+                body: 'Body de la notification',
+                icon: 'images/icons/icon-192x192.png'
+            }
+            const notif = new Notification('Hello nototification', options);
         } else {
             console.log('autorisation de recevoir des notifications a été refusé ! ');
         }
